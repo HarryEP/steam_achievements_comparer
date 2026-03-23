@@ -2,16 +2,18 @@ from app.steam_api import get_player_summary
 from dotenv import load_dotenv
 import os
 
+load_dotenv()
+
 FRIEND1_STEAM_ID: str = os.getenv("FriendID1", "")
 
 
 def main() -> None:
+    if not FRIEND1_STEAM_ID:
+        raise ValueError("FriendID1 is not set in .env")
 
-    steam_id = FRIEND1_STEAM_ID
+    print("Steam ID:", FRIEND1_STEAM_ID)
 
-    print(steam_id)
-
-    data = get_player_summary(steam_id)
+    data = get_player_summary(FRIEND1_STEAM_ID)
 
     print("Full response:")
     print(data)
